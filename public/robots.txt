@@ -1,0 +1,21 @@
+# robots.txt per Nonsonocosa
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://nonsonocosa.it/sitemap.xml
+
+# Blocca file di sistema e cartelle non necessarie
+Disallow: /_next/
+Disallow: /api/
+Disallow: /*.json$
+Disallow: /*.txt$
+
+# Permetti tutte le pagine pubbliche
+Allow: /
+Allow: /mostre/
+Allow: /open-call
+Allow: /info-e-orari
+Allow: /edizioni/
+Allow: /privacy-policy
+Allow: /cookie-policy

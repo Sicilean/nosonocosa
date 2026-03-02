@@ -1,0 +1,383 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: #ff604e;
+  --color-secondary: #222222;
+  --font-sans: var(--font-body-var);
+  --font-heading: var(--font-heading-var);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body-var), sans-serif;
+  font-size: 1.2rem;
+}
+
+/* ============================================
+   Swup Overlay Theme Styles
+   ============================================ */
+
+/* Container principale per Swup - deve corrispondere all'id nel layout */
+#swup {
+  /* Assicura che il contenuto sia visibile durante le transizioni */
+  min-height: 100vh;
+}
+
+/* Overlay nero full-screen che copre la pagina durante la transizione */
+.swup-overlay-black {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #1f1c1a; /* Colore di brand scuro */
+  z-index: 9998;
+  transform: translateY(100%); /* Inizia dal basso (fuori schermo) */
+  will-change: transform;
+  display: none; /* Nascosto di default */
+  pointer-events: none; /* Non intercetta i click quando è nascosto */
+  /* Ottimizzazioni per animazioni fluide */
+  backface-visibility: hidden;
+  perspective: 1000px;
+  /* Forza l'accelerazione hardware GPU */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+/* Overlay arancione full-screen che copre la pagina durante la transizione */
+.swup-overlay-orange {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ff5a43; /* Colore arancione di brand */
+  z-index: 9999;
+  transform: translateY(100%); /* Inizia dal basso (fuori schermo) */
+  will-change: transform;
+  display: none; /* Nascosto di default */
+  pointer-events: none; /* Non intercetta i click quando è nascosto */
+  /* Ottimizzazioni per animazioni fluide */
+  backface-visibility: hidden;
+  perspective: 1000px;
+  /* Forza l'accelerazione hardware GPU */
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+/* 
+  Nota: Le animazioni sono gestite direttamente via JavaScript nel componente SwupProvider.
+  Questi stili CSS sono mantenuti per compatibilità e come fallback.
+*/
+
+/* Supporto per prefers-reduced-motion: disabilita le animazioni */
+@media (prefers-reduced-motion: reduce) {
+  .swup-overlay-black,
+  .swup-overlay-orange {
+    display: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}
+
+/* Prevenzione del flash di contenuto non stilizzato durante la transizione */
+html.is-changing .swup-overlay-black,
+html.is-changing .swup-overlay-orange {
+  pointer-events: none;
+}
+
+/* Assicura che il body non scrolli durante la transizione */
+html.is-changing {
+  overflow: hidden;
+}
+
+/* ============================================
+   Menu Overlay Styles - Full Screen
+   ============================================ */
+
+.menu-overlay {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+/* Assicura che il body non scrolli quando il menu è aperto */
+body.menu-open {
+  overflow: hidden;
+}
+
+/* ============================================
+   Header e Menu Button - Sempre sopra tutto
+   ============================================ */
+
+/* Header globale: sempre presente e sopra ogni elemento */
+header {
+  z-index: 10000 !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  pointer-events: none !important;
+}
+
+/* Container interno dell'header: abilita pointer events */
+header > div {
+  pointer-events: auto !important;
+}
+
+/* Pulsante menu: sempre cliccabile e sopra tutto */
+button[data-menu-button] {
+  z-index: 10001 !important;
+  position: relative !important;
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+/* Assicura che il pulsante menu sia sempre accessibile */
+button[data-menu-button="open"],
+button[data-menu-button="close"] {
+  cursor: pointer !important;
+  pointer-events: auto !important;
+}
+
+/* Menu overlay: sopra tutto quando aperto */
+.menu-overlay {
+  z-index: 10002 !important;
+  pointer-events: auto !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+/* Previeni lo scroll del body quando il menu è aperto */
+body.menu-open {
+  overflow: hidden !important;
+}
+
+/* Assicura che il logo sia sempre cliccabile */
+header a[data-no-swup-animation] {
+  pointer-events: auto !important;
+  cursor: pointer !important;
+}
+
+/* ============================================
+   Fine Header e Menu Styles
+   ============================================ */
+
+/* ============================================
+   Page Loader - Pre-caricamento con shape diagonale
+   ============================================ */
+
+/* Container del page loader */
+.page-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99999;
+  background-color: #1f1c1a;
+  overflow: hidden;
+}
+
+/* Shape diagonale animata */
+.page-loader-shape {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  will-change: clip-path;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Supporto per prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .page-loader,
+  .page-loader-shape {
+    display: none !important;
+    transition: none !important;
+  }
+}
+
+/* ============================================
+   Fine Page Loader Styles
+   ============================================ */
+
+/* ============================================
+   Custom Scrollbar - Brand Colors
+   ============================================ */
+
+/* Scrollbar personalizzata per WebKit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 10px; /* Larghezza della scrollbar */
+  height: 10px; /* Altezza per scrollbar orizzontale */
+}
+
+/* Traccia della scrollbar (sfondo) */
+::-webkit-scrollbar-track {
+  background: #f7f3ef; /* Colore di sfondo del sito */
+  border-left: none; /* Rimossa barra laterale bianca */
+}
+
+/* Cursore della scrollbar (thumb) */
+::-webkit-scrollbar-thumb {
+  background: #ff5a43; /* Colore arancione di brand */
+  border-radius: 5px; /* Bordi arrotondati */
+  border: none; /* Rimossa barra laterale bianca */
+  transition: background 0.2s ease; /* Transizione fluida */
+}
+
+/* Hover sul cursore */
+::-webkit-scrollbar-thumb:hover {
+  background: #ff604e; /* Arancione leggermente più scuro al hover */
+}
+
+/* Scrollbar per Firefox */
+* {
+  scrollbar-width: thin; /* Sottile */
+  scrollbar-color: #ff5a43 #f7f3ef; /* thumb track */
+}
+
+/* ============================================
+   Fine Custom Scrollbar Styles
+   ============================================ */
+
+/* ============================================
+   Back to Top Button with Progress Indicator
+   ============================================ */
+
+.progress-wrap {
+  position: fixed;
+  right: 30px;
+  bottom: 30px;
+  height: 46px;
+  width: 46px;
+  cursor: pointer;
+  display: block;
+  border-radius: 50px;
+  box-shadow: inset 0 0 0 2px rgba(31, 28, 26, 0.1);
+  z-index: 9999;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(15px);
+  transition: all 200ms linear;
+  background-color: rgba(247, 243, 239, 0.95);
+  backdrop-filter: blur(10px);
+}
+
+.progress-wrap.active-progress {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Icona freccia verso l'alto */
+.progress-wrap .arrow-icon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: rgba(31, 28, 26, 0.3);
+  z-index: 1;
+  transition: all 200ms linear;
+  pointer-events: none;
+}
+
+.progress-wrap:hover .arrow-icon {
+  color: #ff5a43;
+}
+
+.progress-wrap svg path {
+  fill: none;
+}
+
+.progress-wrap svg.progress-circle path {
+  stroke: #ff5a43; /* Colore arancione di brand */
+  stroke-width: 4;
+  box-sizing: border-box;
+  transition: all 200ms linear;
+}
+
+/* Hover effect sul cerchio */
+.progress-wrap:hover {
+  box-shadow: inset 0 0 0 2px rgba(255, 90, 67, 0.3);
+  background-color: rgba(255, 255, 255, 0.98);
+}
+
+/* Responsive: riduci dimensione su schermi piccoli */
+@media (max-width: 768px) {
+  .progress-wrap {
+    right: 20px;
+    bottom: 20px;
+    height: 40px;
+    width: 40px;
+  }
+
+  .progress-wrap::after,
+  .progress-wrap::before {
+    border-left-width: 5px;
+    border-right-width: 5px;
+    border-bottom-width: 8px;
+  }
+}
+
+/* ============================================
+   Fine Back to Top Styles
+   ============================================ */
+
+/* ============================================
+   Touch Optimization for Mobile Buttons
+   ============================================ */
+
+/* Migliora la risposta touch sui dispositivi mobili */
+.touch-manipulation {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Previeni il delay del touch su iOS */
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* ============================================
+   Fine Touch Optimization Styles
+   ============================================ */
