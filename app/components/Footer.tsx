@@ -38,15 +38,20 @@ export function Footer() {
     <footer className="bg-[#222222] text-[#cfcfcf]">
       <div className="mx-auto w-full max-w-6xl px-6 py-12 sm:px-10 lg:px-16">
         <div className="grid gap-10 lg:grid-cols-[1.2fr_1fr_0.8fr]">
-          <div className="flex items-start gap-6">
-            <span className="h-20 w-4 -skew-x-[18deg] bg-white sm:h-24" />
+          <div className="flex flex-col gap-4">
+            <Image
+              src="/loghi/logo primario.svg"
+              alt="Nonsonocosa 2026"
+              width={220}
+              height={88}
+              className="h-auto w-44 sm:w-52"
+            />
             <div className="text-sm leading-6 sm:text-base">
-              <p className="uppercase tracking-[0.06em]">Nonsonocosa 2026</p>
               <p>Opening: 08–11 Maggio 2026</p>
               <p>Mostre fino al 7 Giugno 2026</p>
             </div>
           </div>
-          <div className="flex flex-col justify-between gap-6 text-sm sm:text-base">
+          <div className="flex flex-col justify-between gap-6 text-sm sm:text-base lg:col-start-3 lg:items-end lg:text-right">
             <ul className="space-y-1">
               {[
                 { text: "Senzano.me", href: "https://www.senzano.me/" },

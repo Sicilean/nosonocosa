@@ -102,7 +102,7 @@ export const metadata: Metadata = {
       "Festival di fotografia sociale a Castelvetrano-Selinunte. Edizione 2026 'Soglie' con mostre, talk e proiezioni al Parco Archeologico di Selinunte.",
     images: [
       {
-        url: "/open-call-bg.jpg",
+        url: "/open-call-bg.webp",
         width: 1200,
         height: 630,
         alt: "Nonsonocosa — Soglie",
@@ -114,7 +114,7 @@ export const metadata: Metadata = {
     title: "Nonsonocosa — Soglie | Festival di Fotografia",
     description:
       "Festival di fotografia sociale a Castelvetrano-Selinunte. Edizione 2026 'Soglie'.",
-    images: ["/open-call-bg.jpg"],
+    images: ["/open-call-bg.webp"],
   },
   robots: {
     index: true,
@@ -221,7 +221,7 @@ export default function RootLayout({
                   "https://www.senzano.me/",
                 ],
               },
-              image: "https://nonsonocosa.it/open-call-bg.jpg",
+              image: "https://nonsonocosa.it/open-call-bg.webp",
               offers: {
                 "@type": "Offer",
                 price: "0",

@@ -53,40 +53,46 @@ function Hero() {
   useEffect(() => {
     // Controlla se il loader viene mostrato o meno
     const checkLoaderStatus = () => {
-      // Se il loader è già stato mostrato in questa sessione, avvia il video immediatamente
       const loaderShown = sessionStorage.getItem('pageLoaderShown');
       
-      // Controlla se c'è un referrer interno (navigazione tra pagine)
       const hasInternalReferrer = 
         document.referrer && 
         document.referrer.includes(window.location.origin) &&
         document.referrer !== window.location.href;
 
-      // Se il loader non viene mostrato (navigazione interna o già mostrato), avvia il video subito
       if (loaderShown === 'true' || hasInternalReferrer) {
         setCanPlayVideo(true);
         return;
       }
 
-      // Se il loader viene mostrato, controlla se è già completato
       const loader = document.querySelector('[data-page-loader]');
       if (!loader || loader.getAttribute('data-loading') === 'false') {
         setCanPlayVideo(true);
       }
     };
 
-    // Controlla immediatamente
     checkLoaderStatus();
 
-    // Ascolta l'evento di completamento del caricamento (per primo caricamento)
-    const handleLoaderComplete = () => {
-      setCanPlayVideo(true);
+    const handleLoaderComplete = () => setCanPlayVideo(true);
+    window.addEventListener('pageLoaderComplete', handleLoaderComplete);
+
+    // Quando si torna sulla home via navigazione SPA, React può riutilizzare
+    // il componente dalla cache senza rimontarlo: canPlayVideo rimane true
+    // ma il video è paused. swup:pageView viene dispatchiato da SwupProvider
+    // ad ogni navigazione completata, forziamo qui il restart.
+    const handlePageView = () => {
+      const video = videoRef.current;
+      if (!video) return;
+      video.currentTime = 0;
+      const p = video.play();
+      if (p && typeof p.catch === 'function') p.catch(() => {});
     };
 
-    window.addEventListener('pageLoaderComplete', handleLoaderComplete);
+    window.addEventListener('swup:pageView', handlePageView);
 
     return () => {
       window.removeEventListener('pageLoaderComplete', handleLoaderComplete);
+      window.removeEventListener('swup:pageView', handlePageView);
     };
   }, []);
 
@@ -287,7 +293,7 @@ function OpenCallBlock() {
     <section id="open-call" className="relative py-16 text-white overflow-hidden">
       <div className="absolute inset-0">
         <Image
-          src="/open-call-bg.jpg"
+          src="/open-call-bg.webp"
           alt="Spazio espositivo"
           fill
           className="object-cover"

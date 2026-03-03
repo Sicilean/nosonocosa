@@ -12,7 +12,7 @@ const EASING = "cubic-bezier(0.25, 0.1, 0.25, 1)"; // Curva naturale
 const navLinks = [
   { label: "Home", href: "/" },
   { label: "Concept", href: "/#programma" },
-  { label: "Mostre", href: "/#mostre" },
+  { label: "Mostre", href: "/mostre" },
   { label: "Opencall", href: "/open-call" },
   { label: "Info e orari", href: "/info-e-orari" },
   { label: "Edizione 2025", href: "/edizioni/2025" },

@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     url: "https://nonsonocosa.it/open-call",
     images: [
       {
-        url: "/open-call-bg.jpg",
+        url: "/open-call-bg.webp",
         width: 1200,
         height: 630,
         alt: "Open Call Nonsonocosa — Soglie",
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     title: "Open Call — Soglie | Nonsonocosa",
     description:
       "Open Call per progetti fotografici. Scadenza: 1 Aprile 2026.",
-    images: ["/open-call-bg.jpg"],
+    images: ["/open-call-bg.webp"],
   },
   alternates: {
     canonical: "/open-call",
@@ -150,7 +150,7 @@ export default function OpenCallPage() {
                   <div className="grid gap-6 lg:grid-cols-[200px_1fr] lg:gap-8">
                     <div className="relative aspect-[3/4] w-full max-w-[200px] overflow-hidden bg-[#dfe6ee]">
                       <Image
-                        src="/giuria/mattia-crocetti.jpg"
+                        src="/giuria/mattia-crocetti.webp"
                         alt="Mattia Crocetti"
                         fill
                         className="object-cover"
@@ -175,7 +175,7 @@ export default function OpenCallPage() {
                   <div className="grid gap-6 lg:grid-cols-[200px_1fr] lg:gap-8">
                     <div className="relative aspect-[3/4] w-full max-w-[200px] overflow-hidden bg-[#dfe6ee]">
                       <Image
-                        src="/giuria/camilla-miliani.jpg"
+                        src="/giuria/camilla-miliani.webp"
                         alt="Camilla Miliani"
                         fill
                         className="object-cover"

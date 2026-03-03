@@ -88,7 +88,7 @@ export default function InfoEOriariPage() {
                     Ingresso
                   </h2>
                   <p className="text-lg text-[#1f1c1a]">
-                    Gratuito
+                    A pagamento
                   </p>
                 </div>
               </div>
